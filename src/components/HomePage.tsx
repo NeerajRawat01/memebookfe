@@ -8,7 +8,7 @@ import SettingSection from "./SettingSection";
 const HomePage = () => {
   const [section, setSection] = useState("home");
   return (
-    <div className="flex">
+    <div className="hidden md:flex ">
       <div className="flex flex-col  fixed h-screen border-r-2 bg-gray-100 px-12 py-7 gap-10 font-semibold">
         <button onClick={() => setSection("home")} className="text-left">
           Home
