@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { RxHamburgerMenu } from "react-icons/rx"
 import Menu from './Menu'
-import Menu2 from './Menu2'
+import Sidebar from './Sidebar'
 
 const NavBar = () => {
   const [isMenu, setIsMenu] = useState < boolean >(false)
@@ -12,14 +12,18 @@ const NavBar = () => {
     })
   }
 
+  function close() {
+    setIsMenu(false)
+  }
+
   return (
     <nav className='bg-blue-500 text-white relative h-16 flex items-centers sm:h-20'>
       <div className='w-11/12 mx-auto flex items-center sm:hidden'>
         <RxHamburgerMenu onClick={handleBurgerClick} className='font-semibold text-2xl cursor-pointer' />
-        {isMenu && <Menu onCrossClicked={handleBurgerClick} />}
+        {isMenu && <Sidebar onCrossClicked={handleBurgerClick} close={close} />}
       </div>
       <div className='hidden sm:flex sm:items-center sm:w-11/12 sm:mx-auto'>
-          <Menu2 />
+        <Menu />
       </div>
     </nav>
   )

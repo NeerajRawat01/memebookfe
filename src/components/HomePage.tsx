@@ -8,25 +8,25 @@ import SettingSection from "./SettingSection";
 const HomePage = () => {
   const [section, setSection] = useState("home");
   return (
-    <div className="hidden md:flex ">
-      <div className="flex flex-col  fixed h-screen border-r-2 bg-gray-100 px-12 py-7 gap-10 font-semibold">
-        <button onClick={() => setSection("home")} className="text-left">
-          Home
+    <aside className="hidden sm:block">
+      <div className="flex flex-col gap-2 py-3 text-gray-700 bg-slate-50 fixed h-screen w-48">
+        <button onClick={() => setSection("home")} className="flex py-1 hover:bg-blue-500 hover:text-white">
+          <span className="px-5 self-start">Home</span>
         </button>
-        <button onClick={() => setSection("explore")} className="text-left">
-          Explore
+        <button onClick={() => setSection("explore")} className="flex py-1 hover:bg-blue-500 hover:text-white">
+          <span className="px-5 self-start">Explore</span>
         </button>
-        <button onClick={() => setSection("chat")} className="text-left">
-          Chat
+        <button onClick={() => setSection("chat")} className="flex py-1 hover:bg-blue-500 hover:text-white">
+          <span className="px-5 self-start">Chat</span>
         </button>
-        <button onClick={() => setSection("favourite")} className="text-left">
-          Favourite
+        <button onClick={() => setSection("favourite")} className="flex py-1 hover:bg-blue-500 hover:text-white">
+          <span className="px-5 self-start">Favourite</span>
         </button>
-        <button onClick={() => setSection("search")} className="text-left">
-          Search
+        <button onClick={() => setSection("search")} className="flex py-1 hover:bg-blue-500 hover:text-white">
+          <span className="px-5 self-start">Search</span>
         </button>
-        <button onClick={() => setSection("setting")} className="text-left">
-          Setting
+        <button onClick={() => setSection("setting")} className="flex py-1 hover:bg-blue-500 hover:text-white">
+          <span className="px-5 self-start">Setting</span>
         </button>
       </div>
       <div className="ml-48 px-6 py-5">
@@ -37,7 +37,7 @@ const HomePage = () => {
         {section === "search" && <SearchSection />}
         {section === "setting" && <SettingSection />}
       </div>
-    </div>
+    </aside>
   );
 };
 

@@ -1,7 +1,7 @@
 import { Menu, Transition } from "@headlessui/react";
 import { CgProfile } from "react-icons/cg";
 
-function Dropdown2() {
+function Dropdown() {
   return (
     <Menu>
       {({ open }) => (
@@ -50,9 +50,6 @@ function Dropdown2() {
                       </a>
                     )}
                   </Menu.Item>
-                  <Menu.Item disabled>
-                    <span className="opacity-75 px-2 py-1">Sample</span>
-                  </Menu.Item>
                   <Menu.Item>
                     {({ active, close }) => (
                       <a
@@ -89,4 +86,4 @@ function Dropdown2() {
   );
 }
 
-export default Dropdown2;
+export default Dropdown;
