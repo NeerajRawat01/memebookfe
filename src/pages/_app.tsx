@@ -1,4 +1,3 @@
-import Dropdown from "@/components/Dropdown2";
 import NavBar from "@/components/NavBar";
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
