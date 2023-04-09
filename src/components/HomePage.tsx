@@ -7,34 +7,32 @@ import SearchSection from "./SearchSection";
 import SettingSection from "./SettingSection";
 const HomePage = () => {
   const [section, setSection] = useState("home");
+  const sectionList = [
+    { section: "home", label: "Home" },
+    { section: "explore", label: "Explore" },
+    { section: "chat", label: "Chat" },
+    { section: "favourite", label: "Favourite" },
+    { section: "search", label: "Search" },
+    { section: "setting", label: "Setting" },
+  ];
 
-  function handleClick(sec: string) {
-    setSection(sec);
+  function handleClick(section: string) {
+    setSection(section);
   }
 
   const itemStyle = "text-left p-2 my-2";
-  const itemWhenClickedStyle = itemStyle + " bg-gray-400";
+  const itemWhenClickedStyle = itemStyle + " text-blue-800 font-bold";
   return (
-    <div className="hidden md:flex ">
+    <div className="hidden md:flex">
       <div className="flex flex-col  fixed h-screen border-r-2 bg-gray-100 px-12 py-5 gap-10 font-semibold">
-        <button onClick={() => handleClick("home")} className={section === "home" ? itemWhenClickedStyle : itemStyle}>
-          Home
-        </button>
-        <button onClick={() => handleClick("explore")} className={section === "explore" ? itemWhenClickedStyle : itemStyle}>
-          Explore
-        </button>
-        <button onClick={() => handleClick("chat")} className={section === "chat" ? itemWhenClickedStyle : itemStyle}>
-          Chat
-        </button>
-        <button onClick={() => handleClick("favourite")} className={section === "favourite" ? itemWhenClickedStyle : itemStyle}>
-          Favourite
-        </button>
-        <button onClick={() => handleClick("search")} className={section === "search" ? itemWhenClickedStyle : itemStyle}>
-          Search
-        </button>
-        <button onClick={() => handleClick("setting")} className={section === "setting" ? itemWhenClickedStyle : itemStyle}>
-          Setting
-        </button>
+        {sectionList.map((e) => (
+          <button
+            onClick={() => handleClick(e.section)}
+            className={section === e.section ? itemWhenClickedStyle : itemStyle}
+          >
+            {e.label}
+          </button>
+        ))}
       </div>
       <div className="ml-48 px-6 py-5">
         {section === "home" && <HomeSection />}
