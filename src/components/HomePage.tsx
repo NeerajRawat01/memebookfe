@@ -7,26 +7,33 @@ import SearchSection from "./SearchSection";
 import SettingSection from "./SettingSection";
 const HomePage = () => {
   const [section, setSection] = useState("home");
+
+  function handleClick(sec: string) {
+    setSection(sec);
+  }
+
+  const itemStyle = "text-left p-2 my-2";
+  const itemWhenClickedStyle = itemStyle + " bg-gray-400";
   return (
-    <aside className="hidden sm:block">
-      <div className="flex flex-col gap-2 py-3 text-gray-700 bg-slate-50 fixed h-screen w-48">
-        <button onClick={() => setSection("home")} className="flex py-1 hover:bg-blue-500 hover:text-white">
-          <span className="px-5 self-start">Home</span>
+    <div className="hidden md:flex ">
+      <div className="flex flex-col  fixed h-screen border-r-2 bg-gray-100 px-12 py-5 gap-10 font-semibold">
+        <button onClick={() => handleClick("home")} className={section === "home" ? itemWhenClickedStyle : itemStyle}>
+          Home
         </button>
-        <button onClick={() => setSection("explore")} className="flex py-1 hover:bg-blue-500 hover:text-white">
-          <span className="px-5 self-start">Explore</span>
+        <button onClick={() => handleClick("explore")} className={section === "explore" ? itemWhenClickedStyle : itemStyle}>
+          Explore
         </button>
-        <button onClick={() => setSection("chat")} className="flex py-1 hover:bg-blue-500 hover:text-white">
-          <span className="px-5 self-start">Chat</span>
+        <button onClick={() => handleClick("chat")} className={section === "chat" ? itemWhenClickedStyle : itemStyle}>
+          Chat
         </button>
-        <button onClick={() => setSection("favourite")} className="flex py-1 hover:bg-blue-500 hover:text-white">
-          <span className="px-5 self-start">Favourite</span>
+        <button onClick={() => handleClick("favourite")} className={section === "favourite" ? itemWhenClickedStyle : itemStyle}>
+          Favourite
         </button>
-        <button onClick={() => setSection("search")} className="flex py-1 hover:bg-blue-500 hover:text-white">
-          <span className="px-5 self-start">Search</span>
+        <button onClick={() => handleClick("search")} className={section === "search" ? itemWhenClickedStyle : itemStyle}>
+          Search
         </button>
-        <button onClick={() => setSection("setting")} className="flex py-1 hover:bg-blue-500 hover:text-white">
-          <span className="px-5 self-start">Setting</span>
+        <button onClick={() => handleClick("setting")} className={section === "setting" ? itemWhenClickedStyle : itemStyle}>
+          Setting
         </button>
       </div>
       <div className="ml-48 px-6 py-5">
@@ -37,7 +44,7 @@ const HomePage = () => {
         {section === "search" && <SearchSection />}
         {section === "setting" && <SettingSection />}
       </div>
-    </aside>
+    </div>
   );
 };
 
