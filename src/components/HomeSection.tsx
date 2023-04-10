@@ -1,8 +1,10 @@
 import { memo } from "react";
+import { Counter } from "./Counter";
 const HomeSection = () => {
   return (
-    <div className="flex">
-    This is Home section
+    <div className="flex flex-col gap-3">
+      This is Home section
+      <Counter />
     </div>
   );
 };

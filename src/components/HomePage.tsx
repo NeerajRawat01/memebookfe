@@ -8,12 +8,12 @@ import SettingSection from "./SettingSection";
 const HomePage = () => {
   const [section, setSection] = useState("home");
   const sectionList = [
-    { section: "home", label: "Home" },
-    { section: "explore", label: "Explore" },
-    { section: "chat", label: "Chat" },
-    { section: "favourite", label: "Favourite" },
-    { section: "search", label: "Search" },
-    { section: "setting", label: "Setting" },
+    { id: 0, section: "home", label: "Home" },
+    { id: 1, section: "explore", label: "Explore" },
+    { id: 2, section: "chat", label: "Chat" },
+    { id: 3, section: "favourite", label: "Favourite" },
+    { id: 4, section: "search", label: "Search" },
+    { id: 5, section: "setting", label: "Setting" },
   ];
 
   function handleClick(section: string) {
