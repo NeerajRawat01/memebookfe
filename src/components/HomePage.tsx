@@ -24,7 +24,7 @@ const HomePage = () => {
   const itemWhenClickedStyle = itemStyle + " text-blue-800 font-bold";
   return (
     <div className="hidden md:flex">
-      <div className="flex flex-col  fixed h-screen border-r-2 bg-gray-100 px-12 py-5 gap-10 font-semibold">
+      <div className="flex flex-col  fixed h-screen border-r-2 bg-gray-100 px-14 py-5  gap-10 font-semibold">
         {sectionList.map((e) => (
           <button
             onClick={() => handleClick(e.section)}
@@ -34,7 +34,7 @@ const HomePage = () => {
           </button>
         ))}
       </div>
-      <div className="ml-48 px-6 py-5">
+      <div className="ml-[12.32rem] ">
         {section === "home" && <HomeSection />}
         {section === "explore" && <ExploreSection />}
         {section === "chat" && <ChatSection />}

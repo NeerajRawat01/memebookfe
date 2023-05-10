@@ -17,7 +17,7 @@ const NavBar = () => {
   }
 
   return (
-    <nav className="bg-blue-500 text-white relative h-16 flex items-centers sm:h-20">
+    <nav className="bg-blue-500 backdrop-blur top-0 sticky z-10 text-white  h-16 flex items-centers sm:h-20">
       <div className="w-11/12 mx-auto flex items-center sm:hidden">
         <RxHamburgerMenu
           onClick={handleBurgerClick}

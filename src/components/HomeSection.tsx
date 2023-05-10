@@ -1,11 +1,36 @@
-import { memo } from "react";
-import { Counter } from "./Counter";
+import { memo, useEffect, useState } from "react";
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchMemes } from "@/store/slices/memeSlice";
+import { memeListSelector } from "@/store/slices/selectors/meme.selector";
+import MemeCard from "./MemeCard";
 const HomeSection = () => {
+  const dispatch = useDispatch();
+  const memes = useSelector(memeListSelector);
+  useEffect(() => {
+    dispatch(fetchMemes());
+  }, []);
+
+  const download = async (url: string, name: string) => {
+    const image = await fetch(url);
+    const imageBlob = await image.blob();
+    const imageURL = URL.createObjectURL(imageBlob);
+    const link = document.createElement("a");
+    link.href = imageURL;
+    link.download = name;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   return (
-    <div className="flex flex-col gap-3">
-      This is Home section
-      <Counter />
-    </div>
+    <React.Fragment>
+      <div className="bg-gray-300 flex flex-wrap gap-7 p-3 justify-center">
+        {memes.map((e) => (
+          <MemeCard name={e.name} url={e.url} onClick={download} />
+        ))}
+      </div>
+    </React.Fragment>
   );
 };
 

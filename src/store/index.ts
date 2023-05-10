@@ -5,10 +5,12 @@ import { Store } from "redux";
 import createSagaMiddleware, { Task } from "redux-saga";
 import authReducer from "./slices/authSlice";
 import rootSaga from "./sagas";
+import { appReducer } from "./slices";
+import memeReducer from "./slices/memeSlice";
 
-// export interface SagaStore extends Store {
-//   sagaTask?: Task;
-// }
+export interface SagaStore extends Store {
+  sagaTask?: Task;
+}
 
 // create a makeStore function
 const makeStore = () => {
@@ -19,6 +21,7 @@ const makeStore = () => {
   const store = configureStore({
     reducer: {
       auth: authReducer,
+      memes: memeReducer,
     },
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware({ serializableCheck: false }).concat(sagaMiddleware),
