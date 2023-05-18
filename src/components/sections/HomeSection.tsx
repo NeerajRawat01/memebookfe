@@ -2,8 +2,8 @@ import { memo, useEffect, useState } from "react";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchMemes } from "@/store/slices/memeSlice";
-import { memeListSelector } from "@/store/slices/selectors/meme.selector";
-import MemeCard from "./MemeCard";
+import { memeListSelector } from "@/store/selectors/meme.selector";
+import MemeCard from "../cards/MemeCard";
 const HomeSection = () => {
   const dispatch = useDispatch();
   const memes = useSelector(memeListSelector);

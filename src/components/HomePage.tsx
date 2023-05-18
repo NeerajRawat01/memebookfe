@@ -1,10 +1,10 @@
 import { memo, useState } from "react";
-import ChatSection from "./ChatSection";
-import ExploreSection from "./ExploreSection";
-import FavouriteSection from "./FavouriteSection";
-import HomeSection from "./HomeSection";
-import SearchSection from "./SearchSection";
-import SettingSection from "./SettingSection";
+import ChatSection from "./sections/ChatSection";
+import ExploreSection from "./sections/ExploreSection";
+import FavouriteSection from "./sections/FavouriteSection";
+import HomeSection from "./sections/HomeSection";
+import SearchSection from "./sections/SearchSection";
+import SettingSection from "./sections/SettingSection";
 const HomePage = () => {
   const [section, setSection] = useState("home");
   const sectionList = [
