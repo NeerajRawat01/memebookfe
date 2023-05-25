@@ -1,4 +1,8 @@
-import { memo, useState } from "react";
+import { sectionList } from "@/constants/sectionList";
+import { currentsectionSelector } from "@/store/selectors/meme.selector copy";
+import { setSection } from "@/store/slices/sectionSlice";
+import { memo } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import ChatSection from "./sections/ChatSection";
 import ExploreSection from "./sections/ExploreSection";
 import FavouriteSection from "./sections/FavouriteSection";
@@ -6,25 +10,16 @@ import HomeSection from "./sections/HomeSection";
 import SearchSection from "./sections/SearchSection";
 import SettingSection from "./sections/SettingSection";
 const HomePage = () => {
-  const [section, setSection] = useState("home");
-  const sectionList = [
-    { id: 0, section: "home", label: "Home" },
-    { id: 1, section: "explore", label: "Explore" },
-    { id: 2, section: "chat", label: "Chat" },
-    { id: 3, section: "favourite", label: "Favourite" },
-    { id: 4, section: "search", label: "Search" },
-    { id: 5, section: "setting", label: "Setting" },
-  ];
-
+  const dispatch = useDispatch();
+  const section = useSelector(currentsectionSelector);
   function handleClick(section: string) {
-    setSection(section);
+    dispatch(setSection(section));
   }
-
   const itemStyle = "text-left p-2 my-2";
   const itemWhenClickedStyle = itemStyle + " text-blue-800 font-bold";
   return (
-    <div className="hidden md:flex">
-      <div className="flex flex-col  fixed h-screen border-r-2 bg-gray-100 px-14 py-5  gap-10 font-semibold">
+    <div className="flex">
+      <div className="hidden md:flex flex-col  fixed h-screen border-r-2 bg-gray-100 px-14 py-5  gap-10 font-semibold">
         {sectionList.map((e) => (
           <button
             onClick={() => handleClick(e.section)}
@@ -34,7 +29,8 @@ const HomePage = () => {
           </button>
         ))}
       </div>
-      <div className="ml-[12.32rem] ">
+      {/* Section area */}
+      <div className="md:ml-[12.32rem]">
         {section === "home" && <HomeSection />}
         {section === "explore" && <ExploreSection />}
         {section === "chat" && <ChatSection />}

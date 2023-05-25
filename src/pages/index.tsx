@@ -1,6 +1,9 @@
 import HomePage from "@/components/HomePage";
 import Head from "next/head";
 
+interface props {
+  data: string;
+}
 export default function Home() {
   return (
     <>

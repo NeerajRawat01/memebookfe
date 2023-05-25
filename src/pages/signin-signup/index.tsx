@@ -1,17 +1,24 @@
-import { NextPage } from "next";
-import { SiGnuprivacyguard } from "react-icons/si";
-import { RiLoginCircleLine } from "react-icons/ri";
-import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { signUp } from "@/store/slices/authSlice";
-import { Form, Formik } from "formik";
-import { object, string } from "yup";
+import {
+    signInLoadingSelector,
+    signUpLoadingSelector,
+} from "@/store/selectors/auth.selector";
+import { signIn, signUp } from "@/store/slices/authSlice";
 import { getAuth } from "firebase/auth";
+import { Form, Formik } from "formik";
+import { NextPage } from "next";
+import { useState } from "react";
+import { BiLoaderCircle } from "react-icons/bi";
+import { RiLoginCircleLine } from "react-icons/ri";
+import { SiGnuprivacyguard } from "react-icons/si";
+import { useDispatch, useSelector } from "react-redux";
+import { object, string } from "yup";
 
 type SigninPageProps = {};
 
 const SigninPage: NextPage<SigninPageProps> = () => {
   const dispatch = useDispatch();
+  const signUpLoading = useSelector(signUpLoadingSelector);
+  const signInLoading = useSelector(signInLoadingSelector);
   const auth = getAuth();
   const [isSignUp, setIsSignUp] = useState(false);
   const [isSignIn, setIsSignIn] = useState(false);
@@ -31,6 +38,9 @@ const SigninPage: NextPage<SigninPageProps> = () => {
         onSubmit={(values) => {
           if (isSignUp) {
             dispatch(signUp(values));
+          }
+          if (isSignIn) {
+            dispatch(signIn(values));
           }
         }}
         initialValues={initialValues}
@@ -82,6 +92,7 @@ const SigninPage: NextPage<SigninPageProps> = () => {
               {/* action buttons */}
               <div className="flex justify-end gap-3 mt-4">
                 <button
+                  disabled={signUpLoading}
                   type="submit"
                   onClick={() => {
                     setIsSignUp(true);
@@ -90,7 +101,11 @@ const SigninPage: NextPage<SigninPageProps> = () => {
                   }}
                   className="flex items-center bg-yellow-400 px-3 py-2 gap-2 rounded-md text-white font-semibold"
                 >
-                  <SiGnuprivacyguard className="text-md" />
+                  {signUpLoading ? (
+                    <BiLoaderCircle className="animate-spin" />
+                  ) : (
+                    <SiGnuprivacyguard className={`text-md`} />
+                  )}
                   SignUp
                 </button>
                 <button
@@ -100,9 +115,13 @@ const SigninPage: NextPage<SigninPageProps> = () => {
                     setIsSignUp(false);
                     handleSubmit;
                   }}
-                  className="flex items-center bg-blue-400 px-3 py-2 gap-2 rounded-md text-white font-semibold"
+                  className="flex items-center  bg-blue-400 px-3 py-2 gap-2 rounded-md text-white font-semibold"
                 >
-                  <RiLoginCircleLine className="text-xl" />
+                  {signInLoading ? (
+                    <BiLoaderCircle className="animate-spin" />
+                  ) : (
+                    <RiLoginCircleLine className="text-xl" />
+                  )}
                   SignIn
                 </button>
               </div>

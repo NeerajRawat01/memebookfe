@@ -1,35 +1,43 @@
-import { all, put, takeLatest } from "redux-saga/effects";
-import { signUp, signUpCompleted, signUpError } from "../slices/authSlice";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { authService } from "@/services/apiServices/authService";
 import { PayloadAction } from "@reduxjs/toolkit";
-import { auth } from "@/firebase/firebase";
+import { all, call, put, takeLatest } from "redux-saga/effects";
+import {
+  signIn,
+  signInCompleted,
+  signInError,
+  signUp,
+  signUpCompleted,
+  signUpError,
+} from "../slices/authSlice";
 
-function* signinSaga(data: any): any {}
+function* signinSaga(
+  data: PayloadAction<{ email: string; password: string }>
+): any {
+  const email = data.payload.email;
+  const password = data.payload.password;
+  try {
+    const data = yield call(authService.signIn, email, password);
+    yield put(signInCompleted(data));
+  } catch (e: any) {
+    alert("something went wrong");
+    yield put(signInError(e.message));
+  }
+}
 
 function* signupSaga(
   data: PayloadAction<{ email: string; password: string }>
 ): any {
   try {
-    console.log("saga");
-    const response = createUserWithEmailAndPassword(
-      auth,
-      data.payload.email,
-      data.payload.password
-    ).then((res) => {
-      // Signed in
-
-      res.user;
-    });
-    console.log("response", response);
+    yield call(authService.signUp, data.payload.email, data.payload.password);
     yield put(signUpCompleted());
   } catch (e: any) {
-    console.log(e.message);
+    alert("something went wrong");
     yield put(signUpError(e.message));
   }
 }
 
 function* authSaga() {
-  yield all([takeLatest(signUp, signupSaga)]);
+  yield all([takeLatest(signUp, signupSaga), takeLatest(signIn, signinSaga)]);
 }
 
 export default authSaga;

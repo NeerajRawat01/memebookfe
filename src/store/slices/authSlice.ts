@@ -1,11 +1,14 @@
-import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
+import { User } from "firebase/auth";
 
 export interface AuthState {
-  loading: boolean;
+  signUpLoading: boolean;
+  signInLoading: boolean;
 }
 const initialState: AuthState = {
-  loading: false,
+  signInLoading: false,
+  signUpLoading: false,
 };
 
 export const authSlice = createSlice({
@@ -16,23 +19,28 @@ export const authSlice = createSlice({
       state,
       action: PayloadAction<{ email: string; password: string }>
     ) => {
-      state.loading = true;
+      state.signUpLoading = true;
     },
 
-    signIn: (state) => {
-      state.loading = true;
+    signIn: (
+      state,
+      action: PayloadAction<{ email: string; password: string }>
+    ) => {
+      state.signInLoading = true;
     },
     signUpCompleted: (state) => {
-      state.loading = false;
+      state.signUpLoading = false;
     },
-    signInCompleted: (state, action: PayloadAction<number>) => {
-      state.loading = false;
+    signInCompleted: (state, action: PayloadAction<User>) => {
+      const uid = action.payload.uid;
+      if (uid) localStorage.setItem("uid", JSON.stringify(uid));
+      state.signInLoading = false;
     },
     signUpError: (state) => {
-      state.loading = true;
+      state.signUpLoading = false;
     },
     signInError: (state) => {
-      state.loading = true;
+      state.signInLoading = false;
     },
   },
 });

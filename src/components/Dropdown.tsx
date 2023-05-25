@@ -1,7 +1,12 @@
 import { Menu, Transition } from "@headlessui/react";
+import { FC } from "react";
 import { CgProfile } from "react-icons/cg";
 
-function Dropdown() {
+interface Props {
+  dropdownItems: any;
+}
+
+const Dropdown: FC<Props> = ({ dropdownItems }) => {
   return (
     <Menu>
       {({ open }) => (
@@ -20,62 +25,25 @@ function Dropdown() {
             <Menu.Items
               static
               as="div"
-              className="absolute top-0 right-0 w-44 mt-7 bg-indigo-50 text-gray-500 flex flex-col gap-2 rounded shadow-md py-5"
+              className="absolute top-0 right-0 w-44 mt-7 bg-indigo-50 text-gray-500 flex flex-col rounded-smpx-2  shadow-sm"
             >
               {open && (
                 <>
-                  <Menu.Item>
-                    {({ active, close }) => (
-                      <a
-                        className={`${
-                          active && "bg-blue-500 text-white"
-                        } px-2 py-1`}
-                        href="#"
-                        onClick={close}
-                      >
-                        Sample
-                      </a>
-                    )}
-                  </Menu.Item>
-                  <Menu.Item>
-                    {({ active, close }) => (
-                      <a
-                        className={`${
-                          active && "bg-blue-500 text-white"
-                        } px-2 py-1`}
-                        href="#"
-                        onClick={close}
-                      >
-                        Sample
-                      </a>
-                    )}
-                  </Menu.Item>
-                  <Menu.Item>
-                    {({ active, close }) => (
-                      <a
-                        className={`${
-                          active && "bg-blue-500 text-white"
-                        } px-2 py-1`}
-                        href="#"
-                        onClick={close}
-                      >
-                        Sample
-                      </a>
-                    )}
-                  </Menu.Item>
-                  <Menu.Item>
-                    {({ active, close }) => (
-                      <a
-                        className={`${
-                          active && "bg-blue-500 text-white"
-                        } px-2 py-1`}
-                        href="#"
-                        onClick={close}
-                      >
-                        Sample
-                      </a>
-                    )}
-                  </Menu.Item>
+                  {dropdownItems.map((e: any) => (
+                    <Menu.Item>
+                      {({ active, close }) => (
+                        <a
+                          className={` px-5 py-2 font-semibold text-black border-b-2 ${
+                            active && "bg-blue-500 text-white"
+                          }`}
+                          href={e.path}
+                          onClick={close}
+                        >
+                          {e.title}
+                        </a>
+                      )}
+                    </Menu.Item>
+                  ))}
                 </>
               )}
             </Menu.Items>
@@ -84,6 +52,6 @@ function Dropdown() {
       )}
     </Menu>
   );
-}
+};
 
 export default Dropdown;
