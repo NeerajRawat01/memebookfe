@@ -2,6 +2,7 @@ import { auth } from "@/firebase/firebase";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  signOut,
 } from "firebase/auth";
 
 class AuthService {
@@ -22,6 +23,9 @@ class AuthService {
       .catch((err) => {
         throw new Error(err);
       });
+  }
+  async signOut(): Promise<any> {
+    return signOut(auth);
   }
 }
 export const authService = AuthService.getInstance();

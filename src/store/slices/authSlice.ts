@@ -1,3 +1,4 @@
+import { auth } from "@/firebase/firebase";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { createSlice } from "@reduxjs/toolkit";
 import { User } from "firebase/auth";
@@ -5,10 +6,12 @@ import { User } from "firebase/auth";
 export interface AuthState {
   signUpLoading: boolean;
   signInLoading: boolean;
+  signOutLoading: boolean;
 }
 const initialState: AuthState = {
   signInLoading: false,
   signUpLoading: false,
+  signOutLoading: false,
 };
 
 export const authSlice = createSlice({
@@ -28,13 +31,21 @@ export const authSlice = createSlice({
     ) => {
       state.signInLoading = true;
     },
+
+    signOut: (state) => {
+      state.signOutLoading = true;
+    },
     signUpCompleted: (state) => {
       state.signUpLoading = false;
     },
-    signInCompleted: (state, action: PayloadAction<User>) => {
-      const uid = action.payload.uid;
-      if (uid) localStorage.setItem("uid", JSON.stringify(uid));
+    signInCompleted: (state) => {
       state.signInLoading = false;
+    },
+    signOutCompleted: (state) => {
+      state.signOutLoading = false;
+    },
+    signOutError: (state) => {
+      state.signOutLoading = false;
     },
     signUpError: (state) => {
       state.signUpLoading = false;
@@ -53,6 +64,9 @@ export const {
   signUpCompleted,
   signInError,
   signUpError,
+  signOut,
+  signOutCompleted,
+  signOutError,
 } = authSlice.actions;
 const authReducer = authSlice.reducer;
 export default authReducer;

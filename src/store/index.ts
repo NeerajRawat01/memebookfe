@@ -7,6 +7,7 @@ import rootSaga from "./sagas";
 import authReducer from "./slices/authSlice";
 import memeReducer from "./slices/memeSlice";
 import sectionReducer from "./slices/sectionSlice";
+import userReducer from "./slices/userSlice";
 
 export interface SagaStore extends Store {
   sagaTask?: Task;
@@ -23,6 +24,7 @@ const makeStore = () => {
       auth: authReducer,
       memes: memeReducer,
       section: sectionReducer,
+      user: userReducer,
     },
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware({ serializableCheck: false }).concat(sagaMiddleware),

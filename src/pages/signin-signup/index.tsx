@@ -1,9 +1,8 @@
 import {
-    signInLoadingSelector,
-    signUpLoadingSelector,
+  signInLoadingSelector,
+  signUpLoadingSelector,
 } from "@/store/selectors/auth.selector";
 import { signIn, signUp } from "@/store/slices/authSlice";
-import { getAuth } from "firebase/auth";
 import { Form, Formik } from "formik";
 import { NextPage } from "next";
 import { useState } from "react";
@@ -19,7 +18,6 @@ const SigninPage: NextPage<SigninPageProps> = () => {
   const dispatch = useDispatch();
   const signUpLoading = useSelector(signUpLoadingSelector);
   const signInLoading = useSelector(signInLoadingSelector);
-  const auth = getAuth();
   const [isSignUp, setIsSignUp] = useState(false);
   const [isSignIn, setIsSignIn] = useState(false);
   const initialValues = {

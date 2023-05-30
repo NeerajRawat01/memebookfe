@@ -3,7 +3,11 @@ import { FC } from "react";
 import { CgProfile } from "react-icons/cg";
 
 interface Props {
-  dropdownItems: any;
+  dropdownItems: {
+    id: number;
+    title: string;
+    path: string;
+  }[];
 }
 
 const Dropdown: FC<Props> = ({ dropdownItems }) => {
@@ -29,7 +33,7 @@ const Dropdown: FC<Props> = ({ dropdownItems }) => {
             >
               {open && (
                 <>
-                  {dropdownItems.map((e: any) => (
+                  {dropdownItems.map((e) => (
                     <Menu.Item>
                       {({ active, close }) => (
                         <a

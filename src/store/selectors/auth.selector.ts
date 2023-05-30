@@ -10,3 +10,7 @@ export const signInLoadingSelector = createSelector(
   [authSelector],
   (authState) => authState.signInLoading
 );
+export const signOutLoadingSelector = createSelector(
+  [authSelector],
+  (authState) => authState.signOutLoading
+);
