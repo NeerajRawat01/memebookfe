@@ -12,7 +12,7 @@ const DeveloperCard: FC = () => {
       <div className="flex flex-col p-3 gap-4 md:flex-row justify-between bg-gray-200 w-full rounded shadow-lg">
         <img
           className="w-[16rem] h-[16rem] object-cover rounded-full"
-          src="https://media.licdn.com/dms/image/D4D03AQHoP-xMW-Hcaw/profile-displayphoto-shrink_400_400/0/1676264665651?e=1691020800&v=beta&t=3a2ttTgEfXlSm9rCoTFRY4lZAw3XPSP3t_B41pcUim8"
+          src="./myPic.jpeg"
           alt=""
         />
         <div className="px-3 py-2 flex flex-col">

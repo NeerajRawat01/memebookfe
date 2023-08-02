@@ -10,16 +10,22 @@ import {
   currentUserSelector,
   verifyingUserSelector,
 } from "@/store/selectors/user.selector";
+import { Meme } from "@/models/meme";
 
 const ExploreSection: FC = () => {
   const dispatch = useDispatch();
   const memes = useSelector(memeListSelector);
   const user = useSelector(currentUserSelector);
   const verifyingUser = useSelector(verifyingUserSelector);
+  const [searchedMemes, setSearchedMemes] = useState<Meme[]>();
+  const [searchTerm, setSearchTerm] = useState<string>();
   useEffect(() => {
     dispatch(fetchMemes());
+    setSearchedMemes(memes);
   }, []);
-
+  useEffect(() => {
+    if (!searchTerm) setSearchedMemes(memes);
+  }, [memes, searchTerm]);
   const download = async (url: string, name: string) => {
     const image = await fetch(url);
     const imageBlob = await image.blob();
@@ -35,11 +41,26 @@ const ExploreSection: FC = () => {
   return (
     <React.Fragment>
       {user ? (
-        <div className="bg-gray-300 flex flex-wrap gap-7 p-3 justify-center">
-          {memes.map((e) => (
-            <MemeCard name={e.name} url={e.url} onClick={download} />
-          ))}
-        </div>
+        <>
+          <div className="flex justify-center bg-gray-300 p-3">
+            <input
+              onChange={(v: any) => {
+                setSearchTerm(v.target.value);
+                const newMemes = searchedMemes?.filter((e) =>
+                  e.name.includes(v.target.value)
+                );
+                setSearchedMemes(newMemes);
+              }}
+              placeholder="Search Memes"
+              className="outline-blue-600 rounded-md w-1/2 p-3"
+            />
+          </div>
+          <div className="bg-gray-300 flex flex-wrap gap-7 p-3 justify-center">
+            {searchedMemes?.map((e) => (
+              <MemeCard name={e.name} url={e.url} onClick={download} />
+            ))}
+          </div>
+        </>
       ) : (
         <div className="flex justify-center items-center pr-60 pb-32 w-screen h-screen">
           {verifyingUser ? (
